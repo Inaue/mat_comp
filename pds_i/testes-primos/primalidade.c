@@ -167,3 +167,53 @@ void primos_no_intervalo(unsigned limite_inferior, unsigned limite_superior, uns
         }
     }
 }
+
+bool miller_rabin(unsigned long long numero_a_verificar, unsigned long long quantidade_de_testes)
+{
+    unsigned long long fator_impar = numero_a_verificar - 1;
+
+    if(numero_a_verificar == 2 || numero_a_verificar == 3)
+        return true;
+
+    if(numero_a_verificar < 2)
+        return false;
+
+    if(numero_a_verificar % 2 == 0)
+        return false;
+
+    while(!(fator_impar & 1))           // ENQUANTO fator_impar NAO FOR IMPAR
+        fator_impar = fator_impar >> 1; // DIVIDA POR 2
+
+    for(; quantidade_de_testes > 0; quantidade_de_testes--)
+        if(!teste_de_miller(numero_a_verificar, fator_impar))
+            return false;
+
+    return true;
+}
+
+bool teste_de_miller(unsigned long long numero_a_verificar, unsigned long long fator_impar)
+{
+    unsigned long long teste, expoente, resto_de_divisao;
+
+    teste            = ((unsigned long long)rand() % (numero_a_verificar - 3)) + 2; // 1 < teste < numero_a_verificar - 1
+    expoente         = fator_impar;
+    resto_de_divisao = pow_mod(teste, expoente, numero_a_verificar);
+    
+    if((resto_de_divisao == 1) || (resto_de_divisao == (numero_a_verificar - 1)))
+        
+        return true;
+
+    while(expoente != (numero_a_verificar - 1))
+    {
+        resto_de_divisao = (resto_de_divisao * resto_de_divisao) % numero_a_verificar;
+        expoente         = expoente << 1; // MULTIPLICA POR 2
+        
+        if(resto_de_divisao == 1)
+            return false;
+
+        if(resto_de_divisao == (numero_a_verificar - 1))
+            return true;
+    }
+
+    return false;
+}
