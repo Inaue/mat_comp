@@ -217,3 +217,67 @@ bool teste_de_miller(unsigned long long numero_a_verificar, unsigned long long f
 
     return false;
 }
+
+char simbolo_de_jacobi(unsigned long long numerador, unsigned long long denominador)
+{
+    if(numerador == 0)
+        return 0;
+
+    if(numerador == 1 || denominador == 1)
+        return 1;
+
+    if(numerador == 2)
+        return (denominador % 8 == 1 || denominador % 8 == 7) ? 1 : -1;
+
+    if(numerador >= denominador)
+        return simbolo_de_jacobi(numerador % denominador, denominador);
+
+    if((numerador & 1) == 0)
+        
+        return simbolo_de_jacobi(2, denominador) * simbolo_de_jacobi(numerador >> 1, denominador);
+
+    if(mdc(numerador, denominador) == 1)
+        return simbolo_de_jacobi(denominador, numerador) * ((numerador % 4 == 3 && denominador % 4 == 3) ? -1 : 1);
+
+    return 0;
+}
+
+unsigned long long mdc(unsigned long long numero_1, unsigned long long numero_2)
+{
+    if(numero_2 == 0)
+        return numero_1;
+
+    return mdc(numero_2, numero_1 % numero_2);
+}
+
+bool solovay_strassen(unsigned long long numero_a_verificar, unsigned long long quantidade_de_testes)
+{
+    unsigned long long teste;
+
+    if(numero_a_verificar == 2 || numero_a_verificar == 3)
+        return true;
+
+    if(numero_a_verificar < 2)
+        return false;
+
+    for(; quantidade_de_testes > 0; quantidade_de_testes--)
+    {
+        teste = ((unsigned long long)rand() % (numero_a_verificar - 3)) + 2; // 1 < teste < numero_a_verificar - 1
+
+        if(mdc(numero_a_verificar, teste) != 1)
+            return false;
+
+        if(simbolo_de_jacobi(teste, numero_a_verificar) != simbolo_de_legendre(teste, numero_a_verificar))
+
+            return false;
+    }
+
+    return true;
+}
+
+char simbolo_de_legendre(unsigned long long numerador, unsigned long long denominador)
+{
+    unsigned long long resultado = pow_mod(numerador, (denominador - 1) / 2, denominador);
+
+    return resultado < 2 ? (char) resultado : -1;
+}

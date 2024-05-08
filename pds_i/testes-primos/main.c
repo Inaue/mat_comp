@@ -10,5 +10,11 @@
 
 int main(int argc, char** argv)
 {
+    unsigned long long n, q_testes = 100;
+
+    for(n = 0; n < 104730; n++)
+        if(solovay_strassen(n, q_testes))
+            printf("%llu ", n);
+
     return SUCESSO;
 }
