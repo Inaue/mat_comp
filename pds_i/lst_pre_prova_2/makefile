@@ -6,7 +6,7 @@ CFLAGS = -g -Wall
 SRC_01 = ./src/exercicio_01.c
 SRC_02 = ./src/exercicio_02.c ./src/vetores.c
 SRC_03 = ./src/exercicio_03.c ./src/vetores.c
-SRC_04 = ./src/exercicio_04.c ./src/vetores.c
+SRC_04 = ./src/exercicio_04.c
 
 OBJ_01 = $(SRC_01:.c=.o)
 OBJ_02 = $(SRC_02:.c=.o)

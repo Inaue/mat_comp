@@ -213,3 +213,15 @@ void inserir_elemento_vetor_lf(double vetor_inserir[], int tamanho, int posicao,
 	vetor_inserir[tamanho] = ultimo_elemento;
     vetor_inserir[posicao] = elemento_inserir;
 }
+
+void inverta_vetor_hh(char vetor_inverter[], int tamanho)
+{
+	int indice_1 = 0, indice_2 = 0;
+
+	for(indice_1 = 0, indice_2 = tamanho - 1; indice_1 < indice_2; indice_1++, indice_2--)
+	{
+		vetor_inverter[indice_1] = vetor_inverter[indice_1] ^ vetor_inverter[indice_2];
+		vetor_inverter[indice_2] = vetor_inverter[indice_1] ^ vetor_inverter[indice_2];
+		vetor_inverter[indice_1] = vetor_inverter[indice_1] ^ vetor_inverter[indice_2];
+	}
+}

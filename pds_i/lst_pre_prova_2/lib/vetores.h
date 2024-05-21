@@ -22,5 +22,6 @@ void inserir_elemento_vetor_lf(double vetor_inserir[], int tamanho, int posicao,
 int procura_no_vetor_lf(const double vetor_procurar[], int tamanho, double numero_procurar);
 
 void printa_vetor_llu(const unsigned long long vetor_printar[], int tamanho, const char * formatacao);
+void inverta_vetor_hh(char vetor_inverter[], int tamanho);
 
 #endif
