@@ -6,7 +6,7 @@
 #define FALSO           !VERDADEIRO
 #define FIM_DE_STR      '\0'
 #define CHAR_FIM_DE_STR 1
-#define MAX_STR         (63 + CHAR_FIM_DE_STR)
+#define MAX_STR         (75 + CHAR_FIM_DE_STR)
 
 int main(int argc, char ** argv);
 void remova_quebra_de_linha (char string[]);
@@ -53,7 +53,7 @@ int main(int argc, char ** argv)
 
 void remova_quebra_de_linha(char string[])
 {
-	while(*string != '\n' && *string != '\0')
+	while(*string != '\n' && *string != FIM_DE_STR)
 		string++;
 
 	*string = FIM_DE_STR;
