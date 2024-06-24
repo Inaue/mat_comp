@@ -11,7 +11,7 @@ void remova_quebra_de_linha (char string[]);
 void imprimaPermutacoes     (char prefixo[], char opcoes[]);
 char removaOpcao            (char opcoes[], unsigned short opcaoARemover);
 void strInsiraChrNoFim      (char string[], char caractere);
-void strRemovaChrNoFim     (char string[]);
+void strRemovaChrNoFim      (char string[]);
 
 int main(int argc, char ** argv)
 {
