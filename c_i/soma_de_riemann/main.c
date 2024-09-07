@@ -1,35 +1,60 @@
+/**
+ * @file   main.c
+ * @brief  Arquivo com aplicativo de calcular soma de riemann pra funções simples.
+ * @author Inaue Ferreira da Silva
+ * @date   07-09-2024
+ */
+
 #include <stdio.h>
 #include <math.h>
 #include <stdlib.h>
 
 #define SUCESSO 0
 
+/**
+ * @brief  Informações adicionais da expressão que representa uma função.
+ */
+
 typedef struct
 {
-	long double multiplicando;
-	long double expoente;
+	long double multiplicando; /**< Número racional pelo qual a potência da função representada é multiplicado. */
+	long double expoente;      /**< Número racional pelo qual a função representada é elevado. */
 }
 Expressao;
 
+/**
+ * @brief  Intervalo no qual a soma de riemann é realizada.
+ */
+
 typedef struct
 {
-	long double inicio;
-	long double fim;
+	long double inicio; /**< Número racional onde a soma de riemann começa. */
+	long double fim;    /**< Número racional onde a soma de riemann termina. */
 }
 Intervalo;
 
-typedef struct
-{
-	Expressao          funcao;
-	Intervalo          intervalo;
-	unsigned long particoes;
-}
-Soma;
+/**
+ * @brief  Informações da soma de riemann.
+ * @see    Expressao
+ * @see    Intervalo
+ */
 
 typedef struct
 {
-	unsigned char esquerda;
-	unsigned char direita;
+	Expressao     funcao;    /**< Informações da expressão. */
+	Intervalo     intervalo; /**< Intervalo onde a soma é realizada. */
+	unsigned long particoes; /**< Quantidade de partições. */
+}
+Soma;
+
+/**
+ * @brief  Precisão com que um número de ponto flutuante é mostrado na saída.
+ */
+
+typedef struct
+{
+	unsigned char esquerda; /**< Quantidade de casas decimais a esquerda da vírgula. */
+	unsigned char direita;  /**< Quantidade de casas decimais a direita da vírgula. */
 }
 Precisao;
 
@@ -44,6 +69,15 @@ long double calculaSomaDeConstante (Soma calculo);
 long double calculaSomaDeOutra     (Soma calculo, long double funcao(long double variavel));
 
 long double funcaoIdentidade (long double x);
+
+/**
+ * @brief  Rotina Principal.
+ * @return Código de erro da execução.
+ *
+ * Rotina Principal do aplicativo, são recebidos o total de testes e uma semente
+ * geradora de sequência de números pseudoaleatórios, então cada linha seguninte
+ * possui as configurações de cada teste.
+ */
 
 int main()
 {
@@ -101,6 +135,13 @@ int main()
 
 	return SUCESSO;
 }
+ 
+/**
+ * @brief  Função de ler precisão da exibição de números com ponto flutuante.
+ * @param  entrada      Arquivo de entrada.
+ * @param  precisaoALer Variável onde são guardadas as informações de precisão lidas.
+ * @see    Precisao
+ */
 
 void lePrecisao(FILE * entrada, Precisao * precisaoALer)
 {
@@ -109,6 +150,13 @@ void lePrecisao(FILE * entrada, Precisao * precisaoALer)
 	precisaoALer->esquerda += precisaoALer->direita;
 }
 
+/**
+ * @brief  Função de ler informações de soma de riemann.
+ * @param  entrada     Arquivo de entrada.
+ * @param  calculoALer Variável onde são guardadas as informações da soma.
+ * @see    Soma
+ */
+
 void leSoma(FILE * entrada, Soma * calculoALer)
 {
 	leExpressao(entrada, &calculoALer->funcao);
@@ -116,17 +164,38 @@ void leSoma(FILE * entrada, Soma * calculoALer)
 	fscanf(entrada, "%lu", &calculoALer->particoes);
 }
 
+/**
+ * @brief  Função de ler informações de expressão.
+ * @param  entrada       Arquivo de entrada.
+ * @return expressaoALer Variável onde são guardadas as informações da expressão.
+ * @see    Expressao
+ */
+
 void leExpressao(FILE * entrada, Expressao * expressaoALer)
 {
 	fscanf(entrada, "%Lf", &expressaoALer->multiplicando);
 	fscanf(entrada, "%Lf", &expressaoALer->expoente);
 }
 
+/**
+ * @brief  Função de ler informações de intervalo.
+ * @param  entrada       Arquivo de entrada.
+ * @param  intervaloALer Variável onde são guardadas as informações do intervalo.
+ * @see    Intervalo
+ */
+
 void leIntervalo(FILE * entrada, Intervalo * intervaloALer)
 {
 	fscanf(entrada, "%Lf", &intervaloALer->inicio);
 	fscanf(entrada, "%Lf", &intervaloALer->fim);
 }
+
+/**
+ * @brief  Função de calcular soma de riemann de função constante.
+ * @param  calculo Informações da soma.
+ * @return Resultado da Soma de Riemann
+ * @see    Soma
+ */
 
 long double calculaSomaDeConstante(Soma calculo)
 {
@@ -135,6 +204,14 @@ long double calculaSomaDeConstante(Soma calculo)
 
 	return constante * comprimentoDoIntervalo;
 }
+
+/**
+ * @brief  Função de calcular soma de riemann de funções quaisquer.
+ * @param  calculo Informações da soma.
+ * @param  funcao  Função da soma.
+ * @return Resultado da Soma de Riemann
+ * @see    Soma
+ */
 
 long double calculaSomaDeOutra(Soma calculo, long double funcao(long double variavel))
 {
@@ -157,6 +234,12 @@ long double calculaSomaDeOutra(Soma calculo, long double funcao(long double vari
 
 	return somaDasImagens * comprimentoDaParticao;
 }
+
+/**
+ * @brief  Função que retorna o valor passado pra ela.
+ * @param  x Valor passado.
+ * @return Valor passado.
+ */
 
 long double funcaoIdentidade(long double x) { return x; }
 
