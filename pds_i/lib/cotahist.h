@@ -84,6 +84,12 @@ typedef struct
 }
 Reg99;
 
+unsigned char identificaTipoReg (char buffer [STR_REGISTRO]);
+
+void removaReservas (char campo [STR_CAMPO]);
+
+char comparaData (Data d1, Data d2);
+
 bool extraiaReg00 (Reg00* registro, char buffer [STR_REGISTRO]);
 bool extraiaReg01 (Reg01* registro, char buffer [STR_REGISTRO]);
 bool extraiaReg99 (Reg99* registro, char buffer [STR_REGISTRO]);
@@ -91,11 +97,16 @@ bool extraiaCampo (char campo [STR_CAMPO], char buffer [STR_REGISTRO], unsigned 
 bool extraiaData  (Data* dataExtrair, char campo [STR_CAMPO]);
 bool ehNumerico   (char campo [STR_CAMPO]);
 
-unsigned char identificaTipoReg (char buffer [STR_REGISTRO]);
-
 void imprimaReg00 (Reg00 registro, FILE* saida);
 void imprimaReg01 (Reg01 registro, FILE* saida);
 void imprimaReg99 (Reg99 registro, FILE* saida);
 void imprimaData  (Data d, FILE* saida);
+
+void inserirReg00    (Reg00 registro, char buffer [STR_REGISTRO]);
+void inserirReg01    (Reg01 registro, char buffer [STR_REGISTRO]);
+void inserirReg99    (Reg99 registro, char buffer [STR_REGISTRO]);
+void inserirData     (Data dataInserir, char buffer [STR_REGISTRO], unsigned char inicio, unsigned char fim);
+void inserirNumerico (unsigned long long numeroInserir, char buffer [STR_REGISTRO], unsigned char inicio, unsigned char fim);
+void inserirTexto    (char campo [], char buffer [STR_REGISTRO], unsigned char inicio, unsigned char fim);
 
 #endif
