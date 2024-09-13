@@ -257,6 +257,12 @@ bool extraiaData(Data* dataExtrair, char campo [STR_CAMPO])
 	dataExtrair->mes = 10 * (campo[4] - '0') + (campo[5] - '0');
 	dataExtrair->dia = 10 * (campo[6] - '0') + (campo[7] - '0');
 
+	if(dataExtrair->mes > 12 || dataExtrair->mes < 1)
+		return false;
+
+	if(dataExtrair->dia > 31 || dataExtrair->dia < 1)
+		return false;
+
 	return true;
 }
 

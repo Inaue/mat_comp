@@ -21,15 +21,18 @@ int main(int argc, char* argv[])
 	Reg00              cabecalho;
 	Reg01              cotacao;
 	Reg99              trailer;
+	Data               dataGeracao;
 	char               buffer [STR_REGISTRO];
-	char               campo  [STR_CAMPO];
 	unsigned char      tipo;
 	unsigned long long totalRegistros = 0;
 
-	if(argc != 5)
+	if(argc != 6)
 		return BAD_ARG;
 
 	if(!ehFiltroValido(argv))
+		return BAD_ARG;
+
+	if(!extraiaData(&dataGeracao, argv[5]))
 		return BAD_ARG;
 
 	serieHistorica = fopen(argv[1], "r");
@@ -52,7 +55,12 @@ int main(int argc, char* argv[])
 				if(!extraiaReg00(&cabecalho, buffer))
 					return BAD_IN;
 
+				cabecalho.dataGeracao.ano = dataGeracao.ano;
+				cabecalho.dataGeracao.mes = dataGeracao.mes;
+				cabecalho.dataGeracao.dia = dataGeracao.dia;
+				strcpy(cabecalho.nomeArquivo, argv[2]);
 				inserirReg00(cabecalho, buffer);
+
 				fputs(buffer, serieFiltrada);
 				fputc('\n', serieFiltrada);
 				break;
@@ -63,8 +71,8 @@ int main(int argc, char* argv[])
 				if(filtrarReg(cotacao, argv))
 				{
 					totalRegistros++;
-
 					inserirReg01(cotacao, buffer);
+
 					fputs(buffer, serieFiltrada);
 					fputc('\n', serieFiltrada);
 				}
@@ -74,7 +82,13 @@ int main(int argc, char* argv[])
 				if(!extraiaReg99(&trailer, buffer))
 					return BAD_IN;
 
+				trailer.dataGeracao.ano = dataGeracao.ano;
+				trailer.dataGeracao.mes = dataGeracao.mes;
+				trailer.dataGeracao.dia = dataGeracao.dia;
+				trailer.totalRegistros  = totalRegistros;
+				strcpy(trailer.nomeArquivo, argv[2]);
 				inserirReg99(trailer, buffer);
+
 				fputs(buffer, serieFiltrada);
 				fputc('\n', serieFiltrada);
 				break;
