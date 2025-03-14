@@ -1,0 +1,21 @@
+// Autor:  Inaue Ferreira da Silva
+// Data :  13/03/2025
+// Resumo: Esse aplicativo pretende ser uma calcula de potencias de polinomios com tres variaveis e expoente natural.
+
+ring r = QQ, (x,y,z), Dp;
+setring r;
+
+poly p   = 1;
+int  exp = 1;
+
+execute("p = " + read("") + ";");
+
+while(p != 0)
+{
+	execute("exp = " + read("") + ";");
+	p^exp;
+	execute("p   = " + read("") + ";");
+}
+
+quit;
+
