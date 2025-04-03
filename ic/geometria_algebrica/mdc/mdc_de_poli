@@ -1,0 +1,38 @@
+ring racionais_MCs = QQ, (x), Dp;
+setring racionais_MCs;
+
+proc divisao_euclidiana(poly p1, poly p2)
+{
+	poly quociente = 0;
+	poly resto     = p1;
+	list divisao;
+
+	while(resto != 0 and deg(resto) >= deg(p2))
+	{
+		divisao   = lead(resto) / lead(p2);
+		quociente = quociente + divisao[1];
+		resto     = resto - divisao[1] * p2;
+	}
+	
+	return (quociente, resto);
+}
+
+proc mdc(poly p1, poly p2)
+{
+	list divisao = divisao_euclidiana(p1, p2);
+
+	if(divisao[2] == 0)
+	{
+		divisao = p2 / leadcoef(p2);
+		return (divisao[1]);
+	}
+
+	return (mdc(p2, divisao[2]));
+}
+
+execute("poly p1 = " + read(""));
+execute("poly p2 = " + read(""));
+
+mdc(p1, p2);
+
+quit;
