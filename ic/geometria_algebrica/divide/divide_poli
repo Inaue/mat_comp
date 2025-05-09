@@ -1,0 +1,9 @@
+ring racionais_MCs = QQ, (x), Dp;
+setring racionais_MCs;
+
+execute("poly p1 = " + read(""));
+execute("poly p2 = " + read(""));
+
+print((p1 / p2) * p2 == p1);
+
+quit;
