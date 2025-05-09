@@ -1,0 +1,48 @@
+ring racionais_MCs = QQ, (x), Dp;
+setring racionais_MCs;
+
+proc divisao_euclidiana(poly p1, poly p2)
+{
+	poly quociente = 0;
+	poly resto     = p1;
+	list divisao;
+
+	while(resto != 0 and deg(resto) >= deg(p2))
+	{
+		divisao   = lead(resto) / lead(p2);
+		quociente = quociente + divisao[1];
+		resto     = resto - divisao[1] * p2;
+	}
+	
+	return (quociente, resto);
+}
+
+proc exp_mod(poly base, int expoente, poly m)
+{
+	poly resultado = 1;
+	list divisao;
+
+	while(expoente != 0)
+	{
+		if(expoente % 2)
+		{
+			divisao   = divisao_euclidiana(resultado * base, m);
+			resultado = divisao[2];
+		}
+
+		expoente = expoente div 2;
+		divisao  = divisao_euclidiana(base * base, m);
+		base     = divisao[2];
+	}
+
+	return (resultado);
+}
+
+execute("poly base     = " + read(""));
+execute("int  expoente = " + read(""));
+execute("poly m        = " + read(""));
+
+exp_mod(base, expoente, m);
+
+quit;
+
