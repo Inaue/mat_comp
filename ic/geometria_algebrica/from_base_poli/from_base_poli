@@ -1,0 +1,20 @@
+ring racionais_MCs = QQ, (x), Dp;
+setring racionais_MCs;
+
+poly polinomio = 0;
+poly digito;
+
+execute("poly base    = " + read(""));
+execute("int  digitos = " + read(""));
+
+int d = 0;
+while(d < digitos)
+{
+	execute("digito = " + read(""));
+	polinomio = polinomio * base + digito;
+	d = d + 1;
+}
+
+print(polinomio);
+
+quit;

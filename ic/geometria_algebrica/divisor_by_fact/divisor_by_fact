@@ -1,0 +1,50 @@
+ring racionais_MCs = QQ, (x), Dp;
+setring racionais_MCs;
+
+proc imprima_divisores (list irredutiveis, list expoentes, int irredutivel, poly divisor_parcial)
+{
+	if(irredutivel == 0)
+	{
+        print(divisor_parcial);
+	}
+    else
+    {
+        int e = 0;
+        while(e <= expoentes[irredutivel])
+        {
+            imprima_divisores(irredutiveis, expoentes, irredutivel - 1, divisor_parcial);
+            divisor_parcial = divisor_parcial * irredutiveis[irredutivel];
+            e = e + 1;
+        }
+    }
+}
+
+int  n;
+list irredutiveis;
+list expoentes;
+poly irredutivel;
+int  expoente;
+
+execute("n = " + read(""));
+
+int i = 0;
+while(i < n)
+{
+    execute("irredutivel = " + read(""));
+    irredutiveis = insert(irredutiveis, irredutivel);
+
+    i = i + 1;
+}
+
+i = 0;
+while(i < n)
+{
+    execute("expoente = " + read(""));
+    expoentes = insert(expoentes, expoente);
+
+    i = i + 1;
+}
+
+imprima_divisores(irredutiveis, expoentes, n, 1);
+
+quit;

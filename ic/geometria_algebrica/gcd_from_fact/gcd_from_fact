@@ -1,0 +1,71 @@
+ring racionais_MCs = QQ, (x), Dp;
+setring racionais_MCs;
+
+proc min_num(int a, int b)
+{
+    if(a < b)
+    {
+        return (a);
+    }
+
+    return (b);
+}
+
+int  n;
+list irredutiveis;
+list expoentes_1;
+list expoentes_2;
+poly irredutivel;
+poly mdc;
+int  expoente;
+
+execute("n = " + read(""));
+
+int i = 0;
+while(i < n)
+{
+    execute("irredutivel = " + read(""));
+    irredutiveis = insert(irredutiveis, irredutivel);
+
+    i = i + 1;
+}
+
+i = 0;
+while(i < n)
+{
+    execute("expoente = " + read(""));
+    expoentes_1 = insert(expoentes_1, expoente);
+
+    i = i + 1;
+}
+
+i = 0;
+while(i < n)
+{
+    execute("expoente = " + read(""));
+    expoentes_2 = insert(expoentes_2, expoente);
+
+    i = i + 1;
+}
+
+mdc = 1;
+
+int e;
+i = 1;
+while(i <= n)
+{
+    expoente = min_num(expoentes_1[i], expoentes_2[i]);
+
+    e = 0;
+    while(e < expoente)
+    {
+        mdc = mdc * irredutiveis[i];
+        e   = e + 1;
+    }
+
+    i = i + 1;
+}
+
+print(mdc);
+
+quit;

@@ -1,0 +1,38 @@
+ring racionais_MCs = QQ, (x), Dp;
+setring racionais_MCs;
+
+proc divisao_euclidiana(poly p1, poly p2)
+{
+	poly quociente = 0;
+	poly resto     = p1;
+	list divisao;
+
+	while(resto != 0 and deg(resto) >= deg(p2))
+	{
+		divisao   = lead(resto) / lead(p2);
+		quociente = quociente + divisao[1];
+		resto     = resto - divisao[1] * p2;
+	}
+	
+	return (quociente, resto);
+}
+
+proc imprima_na_base(poly p, poly base)
+{
+	if(p != 0)
+	{
+		list divisao   = divisao_euclidiana(p, base);
+		poly quociente = divisao[1];
+		poly resto     = divisao[2];
+
+		imprima_na_base(quociente, base);
+		print(resto);
+	}
+}
+
+execute("poly polinomio = " + read(""));
+execute("poly base      = " + read(""));
+
+imprima_na_base(polinomio, base);
+
+quit;
