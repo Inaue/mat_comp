@@ -1,11 +1,26 @@
+// ARQUIVO   : from_base_poli
+// DESCRICAO : Aplicativo de converter os digitos de uma base de polinomio para um polinomio.
+// AUTOR     : Inaue Ferreira da Silva
+// DATA      : 30/05/2025
+// VERSAO    : 1.0
+// LICENCA   : GPLv3
+
+// Definindo polinomios
+
 ring racionais_MCs = QQ, (x), Dp;
 setring racionais_MCs;
+
+// Variaveis
 
 poly polinomio = 0;
 poly digito;
 
+// Entrada da base e digito inicial
+
 execute("poly base    = " + read(""));
 execute("int  digitos = " + read(""));
+
+// Lendo os digitos do polinomio
 
 int d = 0;
 while(d < digitos)
@@ -14,6 +29,8 @@ while(d < digitos)
 	polinomio = polinomio * base + digito;
 	d = d + 1;
 }
+
+// Imprimindo o polinomio
 
 print(polinomio);
 

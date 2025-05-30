@@ -1,5 +1,19 @@
+// ARQUIVO   : exp_mod
+// DESCRICAO : Exponenciacao modular de polinomios.
+// AUTOR     : Inaue Ferreira da Silva
+// DATA      : 30/05/2025
+// VERSAO    : 1.0
+// LICENCA   : GPLv3
+
+// Definindo polinomios
+
 ring racionais_MCs = QQ, (x), Dp;
 setring racionais_MCs;
+
+// DESCRICAO    : Divisao euclidiana de polinomios.
+// PARAMETRO p1	: polinomio 1
+// PARAMETRO p2	: polinomio 2
+// RETORNO      : (quociente, resto)
 
 proc divisao_euclidiana(poly p1, poly p2)
 {
@@ -16,6 +30,12 @@ proc divisao_euclidiana(poly p1, poly p2)
 	
 	return (quociente, resto);
 }
+
+// DESCRICAO          : Exponenciacao modular de polinomios.
+// PARAMETRO base     : base
+// PARAMETRO expoente : expoente
+// PARAMETRO m	      : polinomio modulo
+// RETORNO            : potencia
 
 proc exp_mod(poly base, int expoente, poly m)
 {
@@ -38,11 +58,14 @@ proc exp_mod(poly base, int expoente, poly m)
 	return (resultado);
 }
 
+// Entrada
+
 execute("poly base     = " + read(""));
 execute("int  expoente = " + read(""));
 execute("poly m        = " + read(""));
 
+// Saida
+
 exp_mod(base, expoente, m);
 
 quit;
-
