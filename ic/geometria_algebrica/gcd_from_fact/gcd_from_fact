@@ -1,5 +1,19 @@
+// ARQUIVO   : gcd_from_fact
+// DESCRICAO : Aplicativo de calcular MDC de polinomios a partir de sua fatoracao em polinomios irredutiveis.
+// AUTOR     : Inaue Ferreira da Silva
+// DATA      : 30/05/2025
+// VERSAO    : 1.0
+// LICENCA   : GPLv3
+
+// Definindo polinomios
+
 ring racionais_MCs = QQ, (x), Dp;
 setring racionais_MCs;
+
+// DESCRICAO.  : Minimo entre dois numeros inteiros.
+// PARAMETRO a : primeiro numero inteiro
+// PARAMETRO b : segundo numero inteiro
+// RETORNO     : menor numero inteiro entre a e b
 
 proc min_num(int a, int b)
 {
@@ -11,6 +25,8 @@ proc min_num(int a, int b)
     return (b);
 }
 
+// Variaveis
+
 int  n;
 list irredutiveis;
 list expoentes_1;
@@ -19,7 +35,11 @@ poly irredutivel;
 poly mdc;
 int  expoente;
 
+// Entrada da quantidade de polinomios irredutiveis e seus expoentes
+
 execute("n = " + read(""));
+
+// Lendo os polinomios irredutiveis
 
 int i = 0;
 while(i < n)
@@ -30,6 +50,8 @@ while(i < n)
     i = i + 1;
 }
 
+// Lendo os expoentes dos polinomios irredutiveis do primeiro polinomio
+
 i = 0;
 while(i < n)
 {
@@ -39,6 +61,8 @@ while(i < n)
     i = i + 1;
 }
 
+// Lendo os expoentes dos polinomios irredutiveis do segundo polinomio
+
 i = 0;
 while(i < n)
 {
@@ -47,6 +71,8 @@ while(i < n)
 
     i = i + 1;
 }
+
+// Calculando o MDC
 
 mdc = 1;
 
@@ -65,6 +91,8 @@ while(i <= n)
 
     i = i + 1;
 }
+
+// Saida
 
 print(mdc);
 

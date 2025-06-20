@@ -1,12 +1,25 @@
+// ARQUIVO   : congruente_mod_m
+// DESCRICAO : Aplicativo de verificar se dois polinomios sao congruentes.
+// AUTOR     : Inaue Ferreira da Silva
+// DATA      : 30/05/2025
+// VERSAO    : 1.0
+// LICENCA   : GPLv3
+
+// Definindo polinomios
+
 ring racionais_MCs = QQ, (x), Dp;
 setring racionais_MCs;
+
+// Entrada
 
 execute("poly p1 = " + read(""));
 execute("poly p2 = " + read(""));
 execute("poly m  = " + read(""));
 
-poly diff = p1 - p2;
+poly diferenca = p1 - p2;
 
-print((diff / m) * m == diff);
+// Saida
+
+print((diferenca / m) * m == diferenca);
 
 quit;

@@ -1,21 +1,34 @@
-// Autor:  Inaue Ferreira da Silva
-// Data :  13/03/2025
-// Resumo: Esse aplicativo pretende ser uma calcula de potencias de polinomios com tres variaveis e expoente natural.
+// ARQUIVO   : potencias_poli_xyz
+// DESCRICAO : Aplicativo de calcular potencias de um polinomio de tres variaveis.
+// AUTOR     : Inaue Ferreira da Silva
+// DATA      : 30/05/2025
+// VERSAO    : 1.0
+// LICENCA   : GPLv3
+
+// Definindo polinomios
 
 ring r = QQ, (x,y,z), Dp;
 setring r;
 
+// Variaveis
+
 poly p   = 1;
 int  exp = 1;
+
+// Entrada
 
 execute("p = " + read("") + ";");
 
 while(p != 0)
 {
+	// Saida
+
 	execute("exp = " + read("") + ";");
 	p^exp;
+
+	// Entrada
+
 	execute("p   = " + read("") + ";");
 }
 
 quit;
-

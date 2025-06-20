@@ -1,5 +1,20 @@
+// ARQUIVO   : divisor_by_fact
+// DESCRICAO : Aplicativo de imprimir todos os divisores de um polinomio dado por seus irredutiveis e respectivos expoentes.
+// AUTOR     : Inaue Ferreira da Silva
+// DATA      : 30/05/2025
+// VERSAO    : 1.0
+// LICENCA   : GPLv3
+
+// Definindo polinomios
+
 ring racionais_MCs = QQ, (x), Dp;
 setring racionais_MCs;
+
+// DESCRICAO                 : Funcao de imprimir divisores de um polinomio.
+// PARAMETRO irredutiveis    : polinomios irredutiveis que compoem o polinomio
+// PARAMETRO expoentes       : expoentes dos respectivos polinomios irredutiveis
+// PARAMETRO irredutivel     : indice do polinomio irredutivel que esta sendo considerado
+// PARAMETRO divisor_parcial : polinomio parcial que esta sendo construido
 
 proc imprima_divisores (list irredutiveis, list expoentes, int irredutivel, poly divisor_parcial)
 {
@@ -19,13 +34,19 @@ proc imprima_divisores (list irredutiveis, list expoentes, int irredutivel, poly
     }
 }
 
+// Variaveis
+
 int  n;
 list irredutiveis;
 list expoentes;
 poly irredutivel;
 int  expoente;
 
+// Entrada da quantidade de polinomios irredutiveis e seus expoentes
+
 execute("n = " + read(""));
+
+// Lendo os polinomios irredutiveis
 
 int i = 0;
 while(i < n)
@@ -36,6 +57,8 @@ while(i < n)
     i = i + 1;
 }
 
+// Lendo os expoentes dos polinomios irredutiveis
+
 i = 0;
 while(i < n)
 {
@@ -44,6 +67,8 @@ while(i < n)
 
     i = i + 1;
 }
+
+// Saida
 
 imprima_divisores(irredutiveis, expoentes, n, 1);
 

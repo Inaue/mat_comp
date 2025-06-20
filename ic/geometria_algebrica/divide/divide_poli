@@ -1,8 +1,21 @@
+// ARQUIVO   : divide_poli
+// DESCRICAO : Aplicativo de verificar se um polinomio e divisivel por outro polinomio.
+// AUTOR     : Inaue Ferreira da Silva
+// DATA      : 30/05/2025
+// VERSAO    : 1.0
+// LICENCA   : GPLv3
+
+// Definindo polinomios
+
 ring racionais_MCs = QQ, (x), Dp;
 setring racionais_MCs;
 
+// Entrada
+
 execute("poly p1 = " + read(""));
 execute("poly p2 = " + read(""));
+
+// Saida
 
 print((p1 / p2) * p2 == p1);
 

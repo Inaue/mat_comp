@@ -1,5 +1,19 @@
+// ARQUIVO   : lineear_eq_2_var
+// DESCRICAO : Aplicativo de resolver a equacao a(x) * p(x) + b(x) * q(x) = c(x) nos polinomios p e q.
+// AUTOR     : Inaue Ferreira da Silva
+// DATA      : 30/05/2025
+// VERSAO    : 1.0
+// LICENCA   : GPLv3
+
+// Definindo polinomios
+
 ring racionais_MCs = QQ, (x), Dp;
 setring racionais_MCs;
+
+// DESCRICAO    : Divisao euclidiana de polinomios.
+// PARAMETRO p1	: polinomio 1
+// PARAMETRO p2	: polinomio 2
+// RETORNO      : (quociente, resto)
 
 proc divisao_euclidiana(poly p1, poly p2)
 {
@@ -17,6 +31,11 @@ proc divisao_euclidiana(poly p1, poly p2)
 	return (quociente, resto);
 }
 
+// DESCRICAO    : Funcao de descobrir combinacao linear do MDC.
+// PARAMETRO p1	: polinomio 1
+// PARAMETRO p2	: polinomio 2
+// RETORNO      : (coeficiente do polinomio 1, coeficiente do polinomio 2)
+
 proc linear_comb_mdc(poly p1, poly p2)
 {
 	if(p2 == 0)
@@ -30,14 +49,20 @@ proc linear_comb_mdc(poly p1, poly p2)
 	return (combinacao[2], combinacao[1] - divisao[1] * combinacao[2]);
 }
 
+// Entrada
+
 execute("poly a = " + read(""));
 execute("poly b = " + read(""));
 execute("poly n = " + read(""));
+
+// Calculo das solucoes
 
 list coeficientes = linear_comb_mdc(a, b);
 poly mdc  = coeficientes[1] * a + coeficientes[2] * b;
 
 list divisao = divisao_euclidiana(n, mdc);
+
+// Saida
 
 if(divisao[2] == 0)
 {

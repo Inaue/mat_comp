@@ -1,5 +1,19 @@
+// ARQUIVO   : to_base_poli
+// DESCRICAO : Aplicativo de calcular digitos de um polinomio em uma base de polinomio.
+// AUTOR     : Inaue Ferreira da Silva
+// DATA      : 30/05/2025
+// VERSAO    : 1.0
+// LICENCA   : GPLv3
+
+// Definindo polinomios
+
 ring racionais_MCs = QQ, (x), Dp;
 setring racionais_MCs;
+
+// DESCRICAO    : Divisao euclidiana de polinomios.
+// PARAMETRO p1	: polinomio 1
+// PARAMETRO p2	: polinomio 2
+// RETORNO      : (quociente, resto)
 
 proc divisao_euclidiana(poly p1, poly p2)
 {
@@ -17,6 +31,10 @@ proc divisao_euclidiana(poly p1, poly p2)
 	return (quociente, resto);
 }
 
+// DESCRICAO      : Funcao de imprimir digitos de um polinomio em uma base.
+// PARAMETRO p    : polinomio
+// PARAMETRO base : polinomio da base
+
 proc imprima_na_base(poly p, poly base)
 {
 	if(p != 0)
@@ -30,8 +48,12 @@ proc imprima_na_base(poly p, poly base)
 	}
 }
 
+// Entrada
+
 execute("poly polinomio = " + read(""));
 execute("poly base      = " + read(""));
+
+// Saida
 
 imprima_na_base(polinomio, base);
 

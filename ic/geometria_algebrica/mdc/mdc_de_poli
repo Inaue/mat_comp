@@ -1,5 +1,19 @@
+// ARQUIVO   : mdc_de_poli
+// DESCRICAO : Aplicativo de calcular MDC de dois polinomios.
+// AUTOR     : Inaue Ferreira da Silva
+// DATA      : 30/05/2025
+// VERSAO    : 1.0
+// LICENCA   : GPLv3
+
+// Definindo polinomios
+
 ring racionais_MCs = QQ, (x), Dp;
 setring racionais_MCs;
+
+// DESCRICAO    : Divisao euclidiana de polinomios.
+// PARAMETRO p1	: polinomio 1
+// PARAMETRO p2	: polinomio 2
+// RETORNO      : (quociente, resto)
 
 proc divisao_euclidiana(poly p1, poly p2)
 {
@@ -17,6 +31,11 @@ proc divisao_euclidiana(poly p1, poly p2)
 	return (quociente, resto);
 }
 
+// DESCRICAO    : Calculo do MDC de polinomios.
+// PARAMETRO p1	: polinomio 1
+// PARAMETRO p2	: polinomio 2
+// RETORNO      : maximo divisor comum
+
 proc mdc(poly p1, poly p2)
 {
 	list divisao = divisao_euclidiana(p1, p2);
@@ -30,8 +49,12 @@ proc mdc(poly p1, poly p2)
 	return (mdc(p2, divisao[2]));
 }
 
+// Entrada
+
 execute("poly p1 = " + read(""));
 execute("poly p2 = " + read(""));
+
+// Saida
 
 mdc(p1, p2);
 
