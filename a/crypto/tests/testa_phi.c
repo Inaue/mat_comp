@@ -1,5 +1,5 @@
 /**
- * @file   testa_euc_div.c
+ * @file   testa_phi.c
  * @brief  Testes para calculo da funcao phi de Euler.
  * @author Inaue Ferreira da Silva
  * @date   01-07-2025

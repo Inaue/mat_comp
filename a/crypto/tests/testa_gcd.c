@@ -1,5 +1,5 @@
 /**
- * @file   testa_euc_div.c
+ * @file   testa_gcd.c
  * @brief  Testes para calculo de mdc.
  * @author Inaue Ferreira da Silva
  * @date   01-07-2025

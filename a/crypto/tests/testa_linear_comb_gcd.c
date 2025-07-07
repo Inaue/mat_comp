@@ -1,6 +1,6 @@
 /**
- * @file   testa_euc_div.c
- * @brief  Testes para calculo de mdc.
+ * @file   testa_linear_comb_gcd.c
+ * @brief  Testes para combinacao linear de mdc.
  * @author Inaue Ferreira da Silva
  * @date   01-07-2025
  */

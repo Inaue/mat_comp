@@ -1,5 +1,5 @@
 /**
- * @file   testa_euc_div.c
+ * @file   testa_eh_raiz_prim.c
  * @brief  Testes para verificar se numero eh ou nao raiz primitiva.
  * @author Inaue Ferreira da Silva
  * @date   01-07-2025

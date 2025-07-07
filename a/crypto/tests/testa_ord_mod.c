@@ -1,5 +1,5 @@
 /**
- * @file   testa_euc_div.c
+ * @file   testa_ord_mod.c
  * @brief  Testes para calculo da ordem de um numero modulo outro.
  * @author Inaue Ferreira da Silva
  * @date   01-07-2025
