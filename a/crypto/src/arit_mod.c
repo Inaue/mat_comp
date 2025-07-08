@@ -20,9 +20,22 @@
  * @return soma
  */
 
-ull add_mod(ll a, ll b, ll mod)
+ll add_mod_ll(ll a, ll b, ll mod)
 {
-	return (((a + b) % mod) + mod) % mod;
+	return (a + b) % mod;
+}
+
+/**
+ * @brief  operacao de adicao modulo n com inteiros nao-negativos
+ * @param  a   primeira parcela
+ * @param  b   segunda parcela
+ * @param  mod modulo
+ * @return soma
+ */
+
+ull add_mod_ull(ull a, ull b, ull mod)
+{
+	return (a + b) % mod;
 }
 
 /**
@@ -33,9 +46,22 @@ ull add_mod(ll a, ll b, ll mod)
  * @return diferenca
  */
 
-ull sub_mod(ll a, ll b, ll mod)
+ll sub_mod_ll(ll a, ll b, ll mod)
 {
-	return (((a - b) % mod) + mod) % mod;
+	return (a - b) % mod;
+}
+
+/**
+ * @brief  operacao de subtracao modulo n com inteiros nao-negativos
+ * @param  a   minuendo
+ * @param  b   subtraendo
+ * @param  mod modulo
+ * @return diferenca
+ */
+
+ull sub_mod_ull(ull a, ull b, ull mod)
+{
+	return (a - b) % mod;
 }
 
 /**
@@ -46,9 +72,22 @@ ull sub_mod(ll a, ll b, ll mod)
  * @return produto
  */
 
-ull mul_mod(ll a, ll b, ll mod)
+ll mul_mod_ll(ll a, ll b, ll mod)
 {
-	return (((a * b) % mod) + mod) % mod;
+	return (a * b) % mod;
+}
+
+/**
+ * @brief  operacao de multiplicacao modulo n com inteiros nao-negativos
+ * @param  a   multiplicando
+ * @param  b   multiplicador
+ * @param  mod modulo
+ * @return produto
+ */
+
+ull mul_mod_ull(ull a, ull b, ull mod)
+{
+	return (a * b) % mod;
 }
 
 /**
@@ -59,7 +98,31 @@ ull mul_mod(ll a, ll b, ll mod)
  * @return potencia
  */
 
-ull exp_mod (ull a, ull b, ull mod)
+ll exp_mod_ll(ll a, ull b, ll mod)
+{
+	ll resultado = 1;
+
+	while(b != 0)
+	{
+		if(b & 1)
+			resultado = (resultado * a) % mod;
+
+		b = b >> 1;
+		a = (a * a) % mod;
+	}
+
+	return resultado;
+}
+
+/**
+ * @brief  operacao de potencia modulo n com inteiros nao-negativos
+ * @param  a   base
+ * @param  b   expoente
+ * @param  mod modulo
+ * @return potencia
+ */
+
+ull exp_mod_ull(ull a, ull b, ull mod)
 {
 	ull resultado = 1;
 

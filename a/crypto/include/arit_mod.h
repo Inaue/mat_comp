@@ -11,10 +11,15 @@
 typedef unsigned long long ull;
 typedef long long          ll;
 
-ull add_mod (ll a, ll b, ll mod);
-ull sub_mod (ll a, ll b, ll mod);
-ull mul_mod (ll a, ll b, ll mod);
-ull exp_mod (ull a, ull b, ull mod);
+ll add_mod_ll (ll a, ll b, ll mod);
+ll sub_mod_ll (ll a, ll b, ll mod);
+ll mul_mod_ll (ll a, ll b, ll mod);
+ll exp_mod_ll (ll a, ull b, ll mod);
+
+ull add_mod_ull (ull a, ull b, ull mod);
+ull sub_mod_ull (ull a, ull b, ull mod);
+ull mul_mod_ull (ull a, ull b, ull mod);
+ull exp_mod_ull (ull a, ull b, ull mod);
 
 int  divisible_by  (ll dividend, ll divisor);
 void euclidian_div (ll a, ll b, ll * q, ll * r);

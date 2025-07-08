@@ -43,7 +43,7 @@ bool little_fermat(ull numero_a_verificar, ull quantidade_de_testes)
     {
         teste = ((ull)rand() % (numero_a_verificar - 3)) + 2; // 1 < teste < numero_a_verificar - 1
 
-        if(exp_mod(teste, numero_a_verificar - 1, numero_a_verificar) != 1)
+        if(exp_mod_ull(teste, numero_a_verificar - 1, numero_a_verificar) != 1)
 
             return false;
     }
@@ -178,7 +178,7 @@ bool teste_de_miller(ull numero_a_verificar, ull fator_impar)
 
     teste            = ((ull)rand() % (numero_a_verificar - 3)) + 2; // 1 < teste < numero_a_verificar - 1
     expoente         = fator_impar;
-    resto_de_divisao = exp_mod(teste, expoente, numero_a_verificar);
+    resto_de_divisao = exp_mod_ull(teste, expoente, numero_a_verificar);
     
     if((resto_de_divisao == 1) || (resto_de_divisao == (numero_a_verificar - 1)))
         
@@ -216,7 +216,7 @@ bool solovay_strassen(ull numero_a_verificar, ull quantidade_de_testes)
         if(gcd(numero_a_verificar, teste) != 1)
             return false;
 
-        if((numero_a_verificar + simbolo_de_jacobi(teste, numero_a_verificar)) % numero_a_verificar != exp_mod(teste, (numero_a_verificar - 1) >> 1, numero_a_verificar))
+        if((numero_a_verificar + simbolo_de_jacobi(teste, numero_a_verificar)) % numero_a_verificar != exp_mod_ull(teste, (numero_a_verificar - 1) >> 1, numero_a_verificar))
 
             return false;
     }
