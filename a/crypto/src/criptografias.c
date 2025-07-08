@@ -23,7 +23,7 @@ void d_h_inicializa(d_h_info * info)
 	while(!miller_rabin(info->primo, 10));
 
 	info->gerador          = encontra_menor_raiz_prim_phi(info->primo, info->primo - 1);
-	info->expoente_privado = ((ull)rand() % (info->primo - 1)) + 2;
+	info->expoente_privado = ((ull)rand() % (info->primo - 3)) + 2;
 	info->numero_publico   = exp_mod(info->gerador, info->expoente_privado, info->primo);
 	info->chave_secreta    = 0;
 }
@@ -35,7 +35,7 @@ void d_h_configura(d_h_info * info, ull primo, ull gerador)
 
 	info->primo            = primo;
 	info->gerador          = gerador;
-	info->expoente_privado = ((ull)rand() % (info->primo - 1)) + 2;
+	info->expoente_privado = ((ull)rand() % (info->primo - 3)) + 2;
 	info->numero_publico   = exp_mod(info->gerador, info->expoente_privado, info->primo);
 	info->chave_secreta    = 0;
 }
