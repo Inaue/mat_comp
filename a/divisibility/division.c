@@ -38,15 +38,3 @@ int main()
 	return SUCESSO;
 }
 
-/**
- * @brief  funcao de decidir se um inteiro divide outro.
- * @param  dividend dividendo
- * @param  divisor divisor
- * @return se eh divisivel ou nao
- */
-
-int divisible_by(ll dividend, ll divisor)
-{
-	return (dividend / divisor) * divisor == dividend;
-}
-
