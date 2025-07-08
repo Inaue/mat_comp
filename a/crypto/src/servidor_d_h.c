@@ -3,11 +3,7 @@
 #include "../include/servidor.h"
 #include "../include/criptografias.h"
 
-#define TAMANHO_MAX_DE_IP  16
-#define TAMANHO_MAX_DE_MSG 1024
-#define FIM_DE_STR '\0'
-
-void remova_quebra_de_linha (char string[]);
+#define TAMANHO_MAX_DE_IP 16
 
 int main()
 {
@@ -25,7 +21,6 @@ int main()
 
 	printf("Digite a porta do servidor: ");
 	scanf("%hu", &porta);
-	getchar();
 
 	Servidor s;
     
@@ -54,16 +49,7 @@ int main()
 	
 	s_termina_conexao(&s);
 	printf("Conexao terminada.\n");
-
 	s_destroi_servidor(&s);
 
 	exit(EXIT_SUCCESS);
-}
-
-void remova_quebra_de_linha(char string[])
-{
-	while(*string != '\n')
-		++string;
-
-	*string = FIM_DE_STR;
 }
