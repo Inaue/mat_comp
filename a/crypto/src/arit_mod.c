@@ -267,3 +267,59 @@ char simbolo_de_jacobi(ull numerador, ull denominador)
 	return +simbolo_de_jacobi(denominador, numerador);
 }
 
+/**
+ * @brief  funcao de verificar se um numero eh raiz primitiva de outro dada a funcao phi
+ * @param  numero        numero
+ * @param  modulo        modulo
+ * @param  phi_do_modulo phi do modulo
+ * @return se eh raiz primitiva ou nao
+ */
+
+char eh_raiz_prim_phi(ull numero, ull modulo, ull phi_do_modulo)
+{
+	if(gcd(numero, modulo) != 1)
+		return FALSO;
+
+	return ord_mod(numero, modulo) == phi_do_modulo;
+}
+
+/**
+ * @brief  encontra a menor raiz primitiva caso exista
+ * @param  modulo modulo
+ * @return raiz primitiva ou 0
+ */
+
+ull encontra_menor_raiz_prim(ull modulo)
+{
+	ull x, phi_do_modulo = phi(modulo);
+	char existe_raiz  = FALSO;
+
+	for(x = 2; !existe_raiz && x < modulo; ++x)
+		existe_raiz = existe_raiz || eh_raiz_prim_phi(x, modulo, phi_do_modulo);
+
+	if(!existe_raiz)
+		return 0;
+
+	return x - 1;
+}
+
+/**
+ * @brief  encontra a menor raiz primitiva caso exista dado phi do modulo
+ * @param  modulo        modulo
+ * @param  phi_do_modulo phi do modulo
+ * @return raiz primitiva ou 0
+ */
+
+ull encontra_menor_raiz_prim_phi(ull modulo, ull phi_do_modulo)
+{
+	ull x;
+	char existe_raiz = FALSO;
+
+	for(x = 2; !existe_raiz && x < modulo; ++x)
+		existe_raiz = existe_raiz || eh_raiz_prim_phi(x, modulo, phi_do_modulo);
+
+	if(!existe_raiz)
+		return 0;
+
+	return x - 1;
+}
