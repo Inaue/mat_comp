@@ -19,7 +19,7 @@ TESTES  = $(BIN)/testa_add_mod $(BIN)/testa_sub_mod $(BIN)/testa_mul_mod \
 	  $(BIN)/testa_eh_raiz_prim_phi $(BIN)/testa_encontra_menor_raiz_prim \
 
 # Alvos
-all: $(BIN)/rsa_guess $(BIN)/cliente_d_h $(BIN)/servidor_d_h
+all: $(BIN)/rsa_guess $(BIN)/cliente_d_h $(BIN)/servidor_d_h $(BIN)/cliente_rsa $(BIN)/servidor_rsa
 testes: $(TESTES)
 
 $(BIN)/rsa_guess: $(SRC)/rsa_guess.c $(ALL_OBJ)
@@ -30,6 +30,12 @@ $(BIN)/cliente_d_h: $(SRC)/cliente_d_h.c $(ALL_OBJ)
 
 $(BIN)/servidor_d_h: $(SRC)/servidor_d_h.c $(ALL_OBJ)
 	$(CC) $(FLAGS) -o $(BIN)/servidor_d_h $(SRC)/servidor_d_h.c $(OBJ)/*.o $(LFLAGS)
+
+$(BIN)/cliente_rsa: $(SRC)/cliente_rsa.c $(ALL_OBJ)
+	$(CC) $(FLAGS) -o $(BIN)/cliente_rsa $(SRC)/cliente_rsa.c $(OBJ)/*.o $(LFLAGS)
+
+$(BIN)/servidor_rsa: $(SRC)/servidor_rsa.c $(ALL_OBJ)
+	$(CC) $(FLAGS) -o $(BIN)/servidor_rsa $(SRC)/servidor_rsa.c $(OBJ)/*.o $(LFLAGS)
 
 $(OBJ)/arit_mod.o: $(SRC)/arit_mod.c $(INCLUDE)/arit_mod.h
 	$(CC) $(FLAGS) -o $(OBJ)/arit_mod.o -c $(SRC)/arit_mod.c
