@@ -33,18 +33,18 @@ int main()
 	c_receba_msg(&c, &primo, sizeof(primo));
 	c_receba_msg(&c, &gerador, sizeof(gerador));
 	c_receba_msg(&c, &numero_publico_do_servidor, sizeof(numero_publico_do_servidor));
-	printf("(Servidor | publico) primo: %llu, gerador: %llu\n", primo, gerador);
-	printf("(Servidor | publico) numero publico do servidor: %llu\n", numero_publico_do_servidor);
+	printf("(Servidor | publico) primo: %lli, gerador: %lli\n", primo, gerador);
+	printf("(Servidor | publico) numero publico do servidor: %lli\n", numero_publico_do_servidor);
 
 	d_h_info info;
 
 	d_h_configura(&info, primo, gerador);
-	printf("(Cliente  | privado) expoente privado do cliente: %llu\n", info.expoente_privado);
-	printf("(Cliente  | publico) numero publico do cliente: %llu\n", info.numero_publico);
+	printf("(Cliente  | privado) expoente privado do cliente: %lli\n", info.expoente_privado);
+	printf("(Cliente  | publico) numero publico do cliente: %lli\n", info.numero_publico);
 	c_envia_msg(&c, &info.numero_publico, sizeof(info.numero_publico));
 	
 	d_h_gera_chave_secreta(&info, numero_publico_do_servidor);
-	printf("(Cliente  | privado) chave secreta: %llu\n", info.chave_secreta);
+	printf("(Cliente  | privado) chave secreta: %lli\n", info.chave_secreta);
 
 	printf("Conexao terminada.\n");
 	c_destroi(&c);

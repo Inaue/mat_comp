@@ -34,18 +34,18 @@ int main()
 	ull      numero_publico_do_cliente;
 
 	d_h_inicializa(&info);
-	printf("(Servidor | publico) primo: %llu, gerador: %llu\n", info.primo, info.gerador);
-	printf("(Servidor | publico) numero publico do servidor: %llu\n", info.numero_publico);
-	printf("(Servidor | privado) expoente privado do servidor: %llu\n", info.expoente_privado);
+	printf("(Servidor | publico) primo: %lli, gerador: %lli\n", info.primo, info.gerador);
+	printf("(Servidor | publico) numero publico do servidor: %lli\n", info.numero_publico);
+	printf("(Servidor | privado) expoente privado do servidor: %lli\n", info.expoente_privado);
 	s_envia_msg(&s, &info.primo, sizeof(info.primo));
 	s_envia_msg(&s, &info.gerador, sizeof(info.gerador));
 	s_envia_msg(&s, &info.numero_publico, sizeof(info.numero_publico));
 	
 	s_receba_msg(&s, &numero_publico_do_cliente, sizeof(numero_publico_do_cliente));
-	printf("(Cliente  | publico) numero publico do cliente: %llu\n", numero_publico_do_cliente);
+	printf("(Cliente  | publico) numero publico do cliente: %lli\n", numero_publico_do_cliente);
 
 	d_h_gera_chave_secreta(&info, numero_publico_do_cliente);
-	printf("(Servidor | privado) chave secreta: %llu\n", info.chave_secreta);
+	printf("(Servidor | privado) chave secreta: %lli\n", info.chave_secreta);
 	
 	s_termina_conexao(&s);
 	printf("Conexao terminada.\n");
