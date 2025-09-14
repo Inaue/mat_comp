@@ -2,7 +2,7 @@
  * @file   testa_arr_linear_search.c
  * @brief  Testes para a busca linear em vetores.
  * @author Inaue Ferreira da Silva
- * @date   18-03-2025
+ * @date   2025-09-13
  */
 
 #include <stdio.h>
@@ -10,10 +10,11 @@
 #include "../include/buscas.h"
 
 char cmp_int (void* a, void* b);
+int  num_int (void* v);
 
 int main()
 {
-	info_tipo t_int = { &cmp_int, sizeof(int) };
+	info_tipo t_int = { sizeof(int), &cmp_int, &num_int };
 
 	int v [5] = { 5, 4, 3, 2, 1 };
 	int elemento_inexistente = 6;
@@ -38,3 +39,9 @@ char cmp_int(void* a, void* b)
 
 	return 0;
 }
+
+int num_int(void* v)
+{
+	return (int)(*(unsigned short*)v);
+}
+

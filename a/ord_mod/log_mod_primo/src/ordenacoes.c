@@ -8,11 +8,10 @@
 #include <stdlib.h>
 #include <string.h>
 #include "../include/ordenacoes.h"
+#include "../include/uteis.h"
 
 /*< Funcoes auxiliares */
 
-void   swap         (void* valor_1, void* valor_2, info_tipo* tipo);
-void * em           (void* vetor, unsigned short i, info_tipo* tipo);
 void   merge        (void* vetor, unsigned short meio, unsigned short tamanho, info_tipo* tipo);
 void * mediana_de_3 (void* a, void* b, void* c, info_tipo* tipo);
 void   particiona   (void* vetor, int tamanho, unsigned short *meio, info_tipo* tipo);
@@ -64,25 +63,6 @@ void selection_sort(void* vetor, unsigned short tamanho, info_tipo* tipo)
 
 		swap(em(vetor, i, tipo), em(vetor, menor, tipo), tipo);
 	}
-}
-
-void swap(void* valor_1, void* valor_2, info_tipo* tipo)
-{
-	void * temp = malloc(sizeof(tipo->tamanho));
-	
-	if(temp == NULL)
-		return;
-
-	memcpy(temp, valor_2, tipo->tamanho);
-	memcpy(valor_2, valor_1, tipo->tamanho);
-	memcpy(valor_1, temp, tipo->tamanho);
-
-	free(temp);
-}
-
-void * em(void* vetor, unsigned short i, info_tipo* tipo)
-{
-	return (void*) ((size_t)vetor + tipo->tamanho * i);
 }
 
 char esta_ordenado(void* vetor, unsigned short tamanho, info_tipo* tipo)
@@ -202,37 +182,52 @@ void shell_sort(void* vetor, unsigned short tamanho, info_tipo* tipo)
 	free(chave);
 }
 
-void counting_sort(unsigned short vetor[], unsigned short tamanho)
+void counting_sort(void* vetor, unsigned short tamanho, info_tipo* tipo)
 {
 	if(tamanho == 0)
 		return;
 
-	unsigned short maximo = vetor[0];
+	unsigned short maximo = (*tipo->num)(em(vetor, 0, tipo));
 
 	for(unsigned short i = 1; i < tamanho; ++i)
 	{
-		maximo = vetor[i] > maximo ? vetor[i] : maximo;
+		maximo = (*tipo->num)(em(vetor, i, tipo)) > maximo ? (*tipo->num)(em(vetor, i, tipo)) : maximo;
 	}
 
 	unsigned short * contagem = calloc(maximo + 1, sizeof(unsigned short));
+	void           * auxiliar = malloc(tamanho * tipo->tamanho);
 
 	if(contagem == NULL)
+	{
+		free(auxiliar);
 		return;
+	}
+	else if(auxiliar == NULL)
+	{
+		free(contagem);
+		return;
+	}
 
 	for(unsigned short i = 0; i < tamanho; ++i)
 	{
-		++contagem[vetor[i]];
+		++contagem[(*tipo->num)(em(vetor, i, tipo))];
 	}
 
-	for(unsigned short i = 0, k = 0; i < maximo + 1; ++i)
+	for(unsigned short i = 1; i <= maximo; ++i)
 	{
-		for(unsigned short j = 0; j < contagem[i]; ++j, ++k)
-		{
-			vetor[k] = i;
-		}
+		contagem[i] += contagem[i - 1];
+	}
+
+	memcpy(auxiliar, vetor, tamanho * tipo->tamanho);
+
+	for (unsigned short i = tamanho; i > 0; --i) {
+
+		--contagem[(*tipo->num)(em(auxiliar, i - 1, tipo))];
+		memcpy(em(vetor, contagem[(*tipo->num)(em(auxiliar, i - 1, tipo))], tipo), em(auxiliar, i - 1, tipo), tipo->tamanho);
 	}
 
 	free(contagem);
+	free(auxiliar);
 }
 
 void quick_sort(void* vetor, unsigned short tamanho, info_tipo* tipo)
@@ -310,10 +305,35 @@ void particiona_3(void* vetor, int tamanho, unsigned short *meio, info_tipo* tip
 
 void* mediana_de_3 (void* a, void* b, void* c, info_tipo* tipo)
 {
-    if ((*tipo->cmp)(a, b) > 0 && (*tipo->cmp)(b, c) > 0) return b;  // a <= b <= c
+    if ((*tipo->cmp)(a, b) > 0 && (*tipo->cmp)(b, c) > 0) return b;      // a <= b <= c
 	if ((*tipo->cmp)(a, c) > 0 && (*tipo->cmp)(c, b) > 0) return c;  // a <= c <= b
 	if ((*tipo->cmp)(b, a) > 0 && (*tipo->cmp)(a, c) > 0) return a;  // b <= a <= c
 	if ((*tipo->cmp)(b, c) > 0 && (*tipo->cmp)(c, a) > 0) return c;  // b <= c <= a
 	if ((*tipo->cmp)(c, a) > 0 && (*tipo->cmp)(a, b) > 0) return a;  // c <= a <= b
-    return b;                                                        // c <= b <= a
+    return b;                                                            // c <= b <= a
 }
+
+char eh_permutacao(void* vetor_1, void* vetor_2, unsigned short tamanho, info_tipo* tipo)
+{
+	unsigned char* pareado = calloc(tamanho, tipo->tamanho);
+
+	for(unsigned short i = 0; i < tamanho; ++i)
+	{
+		unsigned short j;
+
+		for(j = 0; j < tamanho; ++j)
+		{
+			if((*tipo->cmp)(em(vetor_1, i, tipo), em(vetor_2, j, tipo)) == 0 && !pareado[j])
+			{
+				pareado[j] = 1;
+				break;
+			}
+		}
+
+		if(j == tamanho || !pareado[j])
+			return 0;
+	}
+
+	return 1;
+}
+

@@ -8,10 +8,6 @@
 #include <stdlib.h>
 #include "../include/buscas.h"
 
-/*< Funcoes auxiliares */
-
-void * em_busca (void* vetor, unsigned short i, info_tipo* tipo);
-
 /*< Funcoes de busca */
 
 int arr_linear_search(void* vetor, unsigned short tamanho, void* elemento, info_tipo* tipo)
@@ -20,18 +16,13 @@ int arr_linear_search(void* vetor, unsigned short tamanho, void* elemento, info_
 
 	for(i = 0; i < tamanho; ++i)
 	{
-		if((*tipo->cmp)(em_busca(vetor, i, tipo), elemento) == 0)
+		if((*tipo->cmp)(em(vetor, i, tipo), elemento) == 0)
 		{
 			return i;
 		}
 	}
 
 	return NAO_ENCONTRADO;
-}
-
-void * em_busca(void* vetor, unsigned short i, info_tipo* tipo)
-{
-	return (void*) ((size_t)vetor + tipo->tamanho * i);
 }
 
 int arr_bin_search(void* vetor, unsigned short tamanho, void* elemento, info_tipo* tipo)
@@ -49,7 +40,7 @@ int arr_bin_search(void* vetor, unsigned short tamanho, void* elemento, info_tip
 	}
 
 	unsigned short meio      = tamanho >> 1;
-	char           resultado = (*tipo->cmp)(em_busca(vetor, meio, tipo), elemento);
+	char           resultado = (*tipo->cmp)(em(vetor, meio, tipo), elemento);
 	int            indice;
 
 	if(resultado == 0)
@@ -67,7 +58,7 @@ int arr_bin_search(void* vetor, unsigned short tamanho, void* elemento, info_tip
 	}
 	else
 	{
-		indice = arr_bin_search(em_busca(vetor, meio + 1, tipo), tamanho - meio, elemento, tipo);
+		indice = arr_bin_search(em(vetor, meio + 1, tipo), tamanho - meio, elemento, tipo);
 
 		if(indice == NAO_ENCONTRADO)
 		{

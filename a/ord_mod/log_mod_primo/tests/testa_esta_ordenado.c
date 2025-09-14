@@ -2,18 +2,19 @@
  * @file   testa_esta_ordenado.c
  * @brief  Testes para a funcao 'esta_ordenado'.
  * @author Inaue Ferreira da Silva
- * @date   18-03-2025
+ * @date   2025-09-13
  */
 
 #include <stdio.h>
 #include <stdlib.h>
 #include "../include/ordenacoes.h"
 
-char cmp_int   (void* a, void* b);
+char cmp_int (void* a, void* b);
+int  num_int (void* v);
 
 int main()
 {
-	info_tipo t_int = { &cmp_int, sizeof(int) };
+	info_tipo t_int = { sizeof(int), &cmp_int, &num_int };
 
 	int v1 [5] = { 1, 2, 3, 4, 5 };
 	int v2 [5] = { 1, 2, 2, 7, 7 };
@@ -39,5 +40,10 @@ char cmp_int(void* a, void* b)
 		return +1;
 
 	return 0;
+}
+
+int num_int(void* v)
+{
+	return (int)(*(unsigned short*)v);
 }
 
