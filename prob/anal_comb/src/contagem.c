@@ -6,7 +6,13 @@
  */
 
 #include <stddef.h>
+#include <stdlib.h>
+#include <string.h>
 #include "../include/contagem.h"
+#include "../include/ordenacoes.h"
+
+char cmp_ull (void* a, void* b);
+int  num_ull (void* v);
 
 /**
  * @brief  aplicacao do principio fundamental da contagem
@@ -69,14 +75,24 @@ ull coef_mult(ull total, us total_de_divisoes, ull * divisoes)
 	if(soma_das_dividoes != total)
 		return 0;
 
-	ull contador = 1;
+	ull         contador           = 1;
+	ull         fatorial           = 1;
+	ull         multiplicador      = 1;
+	ull       * divisoes_ordenadas = malloc(total_de_divisoes * sizeof(ull));
+	info_tipo   t_ull              = { sizeof(ull), &cmp_ull, &num_ull };
 
-	contador = fac(total);
+	memcpy(divisoes_ordenadas, divisoes, total_de_divisoes * sizeof(ull));
+	counting_sort(divisoes_ordenadas, total_de_divisoes, &t_ull);
 
-	for (us d = 0; d < total_de_divisoes; ++d) {
+	contador = perm(total, total - divisoes_ordenadas[total_de_divisoes - 1]);
+
+	for (us d = 0; d < total_de_divisoes - 1; ++d) {
 	
-		contador /= fac(divisoes[d]);
+		while (multiplicador < divisoes_ordenadas[d]) { fatorial *= ++multiplicador; }
+		contador /= fatorial;
 	}
+
+	free(divisoes_ordenadas);
 
 	return contador;
 }
@@ -98,5 +114,21 @@ ull potencia(ull base, uc expoente)
 	for (; expoente > 0; contador *= base, --expoente);
 	
 	return contador;
+}
+
+char cmp_ull(void* a, void* b)
+{
+	if(*(ull*)a > *(ull*)b)
+		return -1;
+
+	if(*(ull*)a < *(ull*)b)
+		return +1;
+
+	return 0;
+}
+
+int num_ull(void* v)
+{
+	return (int)(*(ull*)v);
 }
 
