@@ -21,7 +21,7 @@ void   particiona_3 (void* vetor, int tamanho, unsigned short *meio, info_tipo* 
 
 void insertion_sort(void* vetor, unsigned short tamanho, info_tipo* tipo)
 {
-	void * chave = malloc(sizeof(tipo->tamanho));
+	void * chave = malloc(tipo->tamanho);
 
 	if(chave == NULL)
 		return;
@@ -94,7 +94,7 @@ void merge_sort(void* vetor, unsigned short tamanho, info_tipo* tipo)
 
 void merge(void* vetor, unsigned short meio, unsigned short tamanho, info_tipo* tipo)
 {
-	void* auxiliar = malloc(sizeof(tipo->tamanho) * tamanho);
+	void* auxiliar = malloc(tipo->tamanho * tamanho);
 
 	if(auxiliar == NULL)
 		return;
@@ -155,7 +155,7 @@ void bubble_sort(void* vetor, unsigned short tamanho, info_tipo* tipo)
 
 void shell_sort(void* vetor, unsigned short tamanho, info_tipo* tipo)
 {
-	void * chave = malloc(sizeof(tipo->tamanho));
+	void * chave = malloc(tipo->tamanho);
 
 	if(chave == NULL)
 		return;
@@ -331,9 +331,23 @@ char eh_permutacao(void* vetor_1, void* vetor_2, unsigned short tamanho, info_ti
 		}
 
 		if(j == tamanho || !pareado[j])
+		{
+			free(pareado);
+
 			return 0;
+		}
 	}
 
+	free(pareado);
+
 	return 1;
+}
+
+void radix_sort(void* vetor, unsigned short tamanho, info_tipo* tipos[], unsigned short total_de_tipos, sort_fn ordena)
+{
+	for (unsigned short i = total_de_tipos; i > 0; --i) {
+	
+		(*ordena)(vetor, tamanho, tipos[i - 1]);
+	}
 }
 

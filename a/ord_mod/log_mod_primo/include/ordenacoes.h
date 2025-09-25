@@ -28,6 +28,7 @@ void bubble_sort      (void* vetor, unsigned short tamanho, info_tipo* tipo);
 void shell_sort       (void* vetor, unsigned short tamanho, info_tipo* tipo);
 void quick_sort       (void* vetor, unsigned short tamanho, info_tipo* tipo);
 void counting_sort    (void* vetor, unsigned short tamanho, info_tipo* tipo);
+void radix_sort       (void* vetor, unsigned short tamanho, info_tipo* tipos[], unsigned short total_de_tipos, sort_fn ordena);
 void quick_sort_3_ins (void* vetor, unsigned short tamanho, info_tipo* tipo, unsigned short min_part_size);
 
 #endif

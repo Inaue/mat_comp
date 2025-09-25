@@ -14,6 +14,7 @@ TESTES  = $(BIN)/testa_esta_ordenado $(BIN)/testa_insertion_sort \
 		  $(BIN)/testa_selection_sort $(BIN)/testa_merge_sort \
 		  $(BIN)/testa_bubble_sort $(BIN)/testa_counting_sort \
 		  $(BIN)/testa_quick_sort $(BIN)/testa_quick_sort_3_ins \
+		  $(BIN)/testa_radix_sort \
 		  $(BIN)/testa_arr_linear_search $(BIN)/testa_arr_bin_search \
 		  $(BIN)/testa_eh_permutacao
 
@@ -54,6 +55,9 @@ $(BIN)/testa_bubble_sort: $(TESTS)/testa_bubble_sort.c $(OBJ)/ordenacoes.o $(OBJ
 
 $(BIN)/testa_counting_sort: $(TESTS)/testa_counting_sort.c $(OBJ)/ordenacoes.o $(OBJ)/uteis.o
 	$(CC) $(FLAGS) -o $(BIN)/testa_counting_sort $(TESTS)/testa_counting_sort.c $(OBJ)/ordenacoes.o $(OBJ)/uteis.o
+
+$(BIN)/testa_radix_sort: $(TESTS)/testa_radix_sort.c $(OBJ)/ordenacoes.o $(OBJ)/uteis.o
+	$(CC) $(FLAGS) -o $(BIN)/testa_radix_sort $(TESTS)/testa_radix_sort.c $(OBJ)/ordenacoes.o $(OBJ)/uteis.o
 
 $(BIN)/testa_quick_sort: $(TESTS)/testa_quick_sort.c $(OBJ)/ordenacoes.o $(OBJ)/uteis.o
 	$(CC) $(FLAGS) -o $(BIN)/testa_quick_sort $(TESTS)/testa_quick_sort.c $(OBJ)/ordenacoes.o $(OBJ)/uteis.o

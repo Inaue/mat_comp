@@ -15,7 +15,7 @@ void * em(void* vetor, unsigned short i, info_tipo* tipo)
 
 void swap(void* valor_1, void* valor_2, info_tipo* tipo)
 {
-	void * temp = malloc(sizeof(tipo->tamanho));
+	void * temp = malloc(tipo->tamanho);
 	
 	if(temp == NULL)
 		return;
