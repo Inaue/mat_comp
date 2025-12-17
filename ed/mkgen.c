@@ -45,6 +45,7 @@ int main (int argc, char * argv []) {
 		"# Compilador e bandeiras",
 		"CC    = gcc",
 		"FLAGS = -I$(INCLUDE) -Wall -pedantic -g",
+		"",
 		"# Diretorios",
 		"RAIZ    = .",
 		"BIN     = $(RAIZ)/bin",
@@ -58,7 +59,6 @@ int main (int argc, char * argv []) {
 
 	const char * meio [] = {
 
-		"",
 		"# Limpeza",
 		"clean:",
 		"	rm -rf $(BIN) $(OBJ)",
@@ -127,6 +127,14 @@ int main (int argc, char * argv []) {
 	}
 
 	fputc('\n', stdout);
+	fputc('\n', stdout);
+	printf("# Modelos\n");
+	printf("modelos: $(MODELO_OBJ)\n");
+
+	fputc('\n', stdout);
+	printf("# Estruturas\n");
+	printf("estruturas: $(ESTRUTURAS_OBJ)\n");
+	fputc('\n', stdout);
 
 	for (uint8_t i = 0; meio[i]; ++i) {
 	
@@ -139,7 +147,7 @@ int main (int argc, char * argv []) {
 
 	while(app) {
 
-		printf("$(BIN)/%s: $(SRC)/%s.c $(MODELO_OBJ) $(ESTRUTURAS_OBJ) $(BIN)\n", app, app);
+		printf("$(BIN)/%s: $(SRC)/%s.c modelos estruturas $(BIN)\n", app, app);
 		printf("	$(CC) $(FLAGS) -o $(BIN)/%s $(SRC)/%s.c $(MODELO_OBJ) $(ESTRUTURAS_OBJ)\n", app, app);
 		fputc('\n', stdout);
 		app = strtok(NULL, " ");
