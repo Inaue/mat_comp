@@ -63,3 +63,7 @@ def resolve_equacao_exata(coef_m, coef_n, x, y):
     print(str(im + h - c1) + ' = ' + str(c2))
 
     return im + h
+
+def avalia_c(equacao, x0, y0, x, y):
+
+    print('c = ' + str(sp.simplify(equacao.subs(x, x0).subs(y, y0))))
