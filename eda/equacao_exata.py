@@ -46,6 +46,12 @@ def resolve_equacao_nao_exata(coef_m, coef_n, x, y):
 
 def resolve_equacao_exata(coef_m, coef_n, x, y):
 
+    dmdy = sp.simplify(sp.diff(coef_m, y))
+    dndx = sp.simplify(sp.diff(coef_n, x))
+
+    print('dm/dy = ' + str(dmdy))
+    print('dn/dx = ' + str(dndx))
+    
     im   = coef_m.integrate(x)
     dhdy = coef_n - im.diff(y)
     h    = dhdy.integrate(y) + c1
@@ -53,6 +59,7 @@ def resolve_equacao_exata(coef_m, coef_n, x, y):
     print('    p = ' + str(im) + ' + h')
     print('dh/dy = ' + str(dhdy))
     print('    h = ' + str(h))
+    print('')
     print(str(im + h - c1) + ' = ' + str(c2))
 
     return im + h
