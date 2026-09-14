@@ -3,7 +3,10 @@ exec(open('edo_lin_1.py').read())
 import sympy as sp
 
 x  = sp.Symbol('x')
+t  = sp.Symbol('t')
 y  = sp.Symbol('y')
+u  = sp.Symbol('u')
+v  = sp.Symbol('v')
 c1 = sp.Symbol('c1')
 c2 = sp.Symbol('c2')
 
